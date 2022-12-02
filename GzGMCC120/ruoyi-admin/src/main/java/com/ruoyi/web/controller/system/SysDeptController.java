@@ -83,22 +83,7 @@ public class SysDeptController extends BaseController
         dept.setCreateBy(getUsername());
         return toAjax(deptService.insertDept(dept));
     }
-//    /**
-//     * 新增office
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:dept:updateOffice')")
-//    @Log(title = "管理", businessType = BusinessType.UPDATE)
-//    @PostMapping
-//    public AjaxResult updateOffice(@Validated @RequestBody SysDept dept)
-//    {
-////        if (UserConstants.NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept)))
-////        {
-////            return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
-////        }
-////        dept.setCreateBy(getUsername());
-//        String result="sucess";
-//        return success(result);
-//    }
+
     /**
      * 修改部门
      */

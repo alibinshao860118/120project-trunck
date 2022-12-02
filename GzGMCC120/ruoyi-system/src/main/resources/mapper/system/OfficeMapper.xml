@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OfficeMapper">
+    
+    <resultMap type="Office" id="OfficeResult">
+        <result property="id"    column="id"    />
+        <result property="lb"    column="lb"    />
+        <result property="lbmc"    column="lbmc"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <sql id="selectOfficeVo">
+        select id, lb, lbmc, create_time, content from office
+    </sql>
+
+    <select id="selectOfficeList" parameterType="Office" resultMap="OfficeResult">
+        <include refid="selectOfficeVo"/>
+        <where>  
+            <if test="lb != null  and lb != ''"> and lb = #{lb}</if>
+            <if test="lbmc != null  and lbmc != ''"> and lbmc = #{lbmc}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectOfficeById" parameterType="Long" resultMap="OfficeResult">
+        <include refid="selectOfficeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOffice" parameterType="Office">
+        insert into office
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="lb != null">lb,</if>
+            <if test="lbmc != null">lbmc,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="content != null">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="lb != null">#{lb},</if>
+            <if test="lbmc != null">#{lbmc},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="content != null">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOffice" parameterType="Office">
+        update office
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="lb != null">lb = #{lb},</if>
+            <if test="lbmc != null">lbmc = #{lbmc},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="content != null">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOfficeById" parameterType="Long">
+        delete from office where id = #{id}
+    </delete>
+
+    <delete id="deleteOfficeByIds" parameterType="String">
+        delete from office where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

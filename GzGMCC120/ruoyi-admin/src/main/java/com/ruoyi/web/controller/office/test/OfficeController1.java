@@ -24,21 +24,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/office")
-public class OfficeController extends BaseController {
-    /**
-     * 新增部门
-     */
-    @PreAuthorize("@ss.hasPermi('office:add')")
-    @Log(title = "管理", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@Validated @RequestBody String dept)
-    {
-//        if (UserConstants.NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept)))
-//        {
-//            return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
-//        }
-//        dept.setCreateBy(getUsername());
-        String result="sucess";
-        return success(result);
-    }
+public class OfficeController1 extends BaseController {
+
 }

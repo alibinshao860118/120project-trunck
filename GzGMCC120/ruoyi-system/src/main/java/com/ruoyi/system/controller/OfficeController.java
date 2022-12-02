@@ -1,9 +1,17 @@
 package com.ruoyi.system.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson2.JSONObject;
+import com.ruoyi.common.annotation.Anonymous;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,13 +28,14 @@ import com.ruoyi.system.domain.Office;
 import com.ruoyi.system.service.IOfficeService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
-
+import com.deepoove.poi.XWPFTemplate;
 /**
  * 合同文件Controller
  * 
  * @author ruoyi
  * @date 2022-12-02
  */
+@Anonymous
 @RestController
 @RequestMapping("/system/office")
 public class OfficeController extends BaseController
@@ -37,7 +46,7 @@ public class OfficeController extends BaseController
     /**
      * 查询合同文件列表
      */
-    @PreAuthorize("@ss.hasPermi('system:office:list')")
+//    @PreAuthorize("@ss.hasPermi('system:office:list')")
     @GetMapping("/list")
     public TableDataInfo list(Office office)
     {
@@ -68,6 +77,31 @@ public class OfficeController extends BaseController
     {
         return success(officeService.selectOfficeById(id));
     }
+    /**
+     * 转换合同文件
+     */
+    @PostMapping(value = "/changeinfo")
+    public AjaxResult changeinfo(@PathVariable("args") String args)
+    {
+        String result="sucess";
+        Map<String,Object> map = new HashMap<>();
+        JSONObject req = JSONObject.parseObject(args);
+
+        String documentname ="template22.docx";
+        XWPFTemplate template = XWPFTemplate.compile("D:\\A-kingpoint\\改造20221201\\"+documentname).render(
+                new HashMap<String, Object>(){{
+                    put("title", "Hi, poi-tl Word模板引擎");
+                }});
+//        template.write(new FileOutputStream("D:\\kingpoint\\output.docx"));
+//        template.close();
+        try {
+            template.writeAndClose(new FileOutputStream("D:\\A-kingpoint\\output.docx"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String id = req.getString("id");
+        return success(result);
+    }
 
     /**
      * 新增合同文件
@@ -80,6 +114,10 @@ public class OfficeController extends BaseController
         return toAjax(officeService.insertOffice(office));
     }
 
+    private Map map =new HashMap<String, Object>(){{
+        put("title", "Hi, poi-tl Word模板引擎");
+        put("name", "李思");
+    }};
     /**
      * 修改合同文件
      */
@@ -88,6 +126,18 @@ public class OfficeController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody Office office)
     {
+        String result="sucess";
+        String documentname ="template22.docx";
+
+        XWPFTemplate template = XWPFTemplate.compile("D:\\A-kingpoint\\改造20221201\\"+documentname).render(
+                map);
+//        template.write(new FileOutputStream("D:\\kingpoint\\output.docx"));
+//        template.close();
+        try {
+            template.writeAndClose(new FileOutputStream("D:\\A-kingpoint\\output.docx"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return toAjax(officeService.updateOffice(office));
     }
 
