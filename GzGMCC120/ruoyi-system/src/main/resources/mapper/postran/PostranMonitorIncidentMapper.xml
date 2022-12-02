@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.postran.mapper.PostranMonitorIncidentMapper">
+    
+    <resultMap type="PostranMonitorIncident" id="PostranMonitorIncidentResult">
+        <result property="incident"    column="incident"    />
+        <result property="incidentType"    column="incident_type"    />
+        <result property="monitorId"    column="monitor_id"    />
+    </resultMap>
+
+    <sql id="selectPostranMonitorIncidentVo">
+        select incident, incident_type, monitor_id from postran_monitor_incident
+    </sql>
+
+    <select id="selectPostranMonitorIncidentList" parameterType="PostranMonitorIncident" resultMap="PostranMonitorIncidentResult">
+        <include refid="selectPostranMonitorIncidentVo"/>
+        <where>  
+            <if test="incident != null  and incident != ''"> and incident = #{incident}</if>
+            <if test="incidentType != null  and incidentType != ''"> and incident_type = #{incidentType}</if>
+            <if test="monitorId != null  and monitorId != ''"> and monitor_id = #{monitorId}</if>
+        </where>
+    </select>
+    
+    <select id="selectPostranMonitorIncidentByIncident" parameterType="String" resultMap="PostranMonitorIncidentResult">
+        <include refid="selectPostranMonitorIncidentVo"/>
+        where incident = #{incident}
+    </select>
+        
+    <insert id="insertPostranMonitorIncident" parameterType="PostranMonitorIncident">
+        insert into postran_monitor_incident
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="incident != null">incident,</if>
+            <if test="incidentType != null">incident_type,</if>
+            <if test="monitorId != null and monitorId != ''">monitor_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="incident != null">#{incident},</if>
+            <if test="incidentType != null">#{incidentType},</if>
+            <if test="monitorId != null and monitorId != ''">#{monitorId},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePostranMonitorIncident" parameterType="PostranMonitorIncident">
+        update postran_monitor_incident
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="incidentType != null">incident_type = #{incidentType},</if>
+            <if test="monitorId != null and monitorId != ''">monitor_id = #{monitorId},</if>
+        </trim>
+        where incident = #{incident}
+    </update>
+
+    <delete id="deletePostranMonitorIncidentByIncident" parameterType="String">
+        delete from postran_monitor_incident where incident = #{incident}
+    </delete>
+
+    <delete id="deletePostranMonitorIncidentByIncidents" parameterType="String">
+        delete from postran_monitor_incident where incident in 
+        <foreach item="incident" collection="array" open="(" separator="," close=")">
+            #{incident}
+        </foreach>
+    </delete>
+</mapper>

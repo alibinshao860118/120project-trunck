@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.postran.mapper.PostranAssignMapper">
+
+    <resultMap type="PostranAssign" id="PostranAssignResult">
+        <result property="fdId"    column="fd_id"    />
+        <result property="doctor1"    column="doctor1"    />
+        <result property="doctor2"    column="doctor2"    />
+        <result property="nurse1"    column="nurse1"    />
+        <result property="nurse2"    column="nurse2"    />
+        <result property="driver"    column="driver"    />
+        <result property="drawOutHospital"    column="draw_out_hospital"    />
+        <result property="carNo"    column="car_no"    />
+        <result property="licensePlateNo"    column="license_plate_no"    />
+        <result property="remark"    column="remark"    />
+        <result property="newPickUpAddress"    column="new_pick_up_address"    />
+        <result property="specialCondition"    column="special_condition"    />
+        <result property="newReceiveHospitalAddress"    column="new_receive_hospital_address"    />
+        <result property="receiveHospital"    column="receive_hospital"    />
+        <result property="dispatchNo"    column="dispatch_no"    />
+        <result property="jobSuspendReason"    column="job_suspend_reason"    />
+        <result property="jobSuspendTime"    column="job_suspend_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <resultMap type="PostranEntryAssign" id="PostranEntryAssignResult">
+        <result property="fdId"    column="fd_id"    />
+        <result property="acceptNo"    column="accept_no"    />
+        <result property="carCallUnit"    column="car_call_unit"    />
+        <result property="carCallDate"    column="car_call_date"    />
+        <result property="carCallTime"    column="car_call_time"    />
+        <result property="carCallContractPerson"    column="car_call_contract_person"    />
+        <result property="carCallContractNumber"    column="car_call_contract_number"    />
+        <result property="patientName"    column="patient_name"    />
+        <result property="patientIdNumber"    column="patient_id_number"    />
+        <result property="patientContractNumber"    column="patient_contract_number"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="caseSource"    column="case_source"    />
+        <result property="personIdentity"    column="person_identity"    />
+        <result property="nucleateResult"    column="nucleate_result"    />
+        <result property="nucleateIsPositive"    column="nucleate_is_positive"    />
+        <result property="epgHighRiskFactor"    column="epg_high_risk_factor"    />
+        <result property="newHighRiskFactor"    column="new_high_risk_factor"    />
+        <result property="sentHospital"    column="sent_hospital"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="cityEightConfirmTime"    column="city_eight_confirm_time"    />
+        <result property="assignDate"    column="assign_date"    />
+        <result property="assignTime"    column="assign_time"    />
+        <result property="ambulanceType"    column="ambulance_type"    />
+        <result property="noticeTime"    column="notice_time"    />
+        <result property="drawOutTime"    column="draw_out_time"    />
+        <result property="arriveAirportEcTime"    column="arrive_airport_ec_time"    />
+        <result property="pickUpAddress"    column="pick_up_address"    />
+        <result property="ambulanceBackTime"    column="ambulance_back_time"    />
+        <result property="completeJobTime"    column="complete_job_time"    />
+        <result property="patientPersonTime"    column="patient_person_time"    />
+        <result property="carCallRemark"    column="car_call_remark"    />
+        <result property="assignRemark"    column="assign_remark"    />
+        <result property="finishRemark"    column="finish_remark"    />
+        <result property="dutyMan"    column="duty_man"    />
+        <result property="carCallArea"    column="car_call_area"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="isArriveHospital"    column="is_arrive_hospital"    />
+        <result property="assignStatus"    column="assign_status"    />
+        <result property="doctor1"    column="doctor1"    />
+        <result property="doctor2"    column="doctor2"    />
+        <result property="nurse1"    column="nurse1"    />
+        <result property="nurse2"    column="nurse2"    />
+        <result property="driver"    column="driver"    />
+        <result property="drawOutHospital"    column="draw_out_hospital"    />
+        <result property="carNo"    column="car_no"    />
+        <result property="licensePlateNo"    column="license_plate_no"    />
+        <result property="remark"    column="remark"    />
+        <result property="newPickUpAddress"    column="new_pick_up_address"    />
+        <result property="specialCondition"    column="special_condition"    />
+        <result property="newReceiveHospitalAddress"    column="new_receive_hospital_address"    />
+        <result property="receiveHospital"    column="receive_hospital"    />
+        <result property="dispatchNo"    column="dispatch_no"    />
+        <result property="jobSuspendReason"    column="job_suspend_reason"    />
+        <result property="jobSuspendTime"    column="job_suspend_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+
+    <sql id="selectPostranAssignVo">
+        select fd_id, doctor1, doctor2, nurse1, nurse2, driver, draw_out_hospital, car_no, license_plate_no, remark, new_pick_up_address, special_condition, new_receive_hospital_address, receive_hospital, dispatch_no, job_suspend_reason, job_suspend_time, create_by, create_time, update_by, update_time from postran_assign
+    </sql>
+
+    <sql id="selectEntryPostranAssignVo">
+    select a.fd_id, a.accept_no, a.car_call_unit, a.car_call_date, a.car_call_time, a.car_call_contract_person,
+ a.car_call_contract_number, a.patient_name, a.patient_id_number, a.patient_contract_number,
+a.sex, age, a.case_source, a.person_identity, a.nucleate_result, a.nucleate_is_positive,
+a.epg_high_risk_factor, a.new_high_risk_factor, a.sent_hospital, a.license_plate_number,
+a.city_eight_confirm_time, a.assign_date, a.assign_time, a.ambulance_type, a.notice_time,
+a.draw_out_time, a.arrive_airport_ec_time, a.pick_up_address, IFNULL(b.receive_hospital, a.receive_hospital) as receive_hospital,
+a.ambulance_back_time, a.complete_job_time, a.patient_person_time, a.car_call_remark,
+a.assign_remark, a.finish_remark, a.duty_man, IFNULL(b.special_condition, a.special_condition) as special_condition, a.car_call_area,
+a.data_source, a.is_arrive_hospital, a.assign_status,
+ b.doctor1, b.doctor2, b.nurse1, b.nurse2, b.driver, b.draw_out_hospital,
+b.car_no, b.license_plate_no, b.remark, b.new_pick_up_address,
+b.new_receive_hospital_address, b.dispatch_no,
+ b.job_suspend_reason, b.job_suspend_time, b.create_by
+from postran_entry a LEFT JOIN postran_assign b
+on a.fd_id = b.fd_id
+    </sql>
+
+    <select id="selectPostranAssignList" parameterType="PostranAssign" resultMap="PostranAssignResult">
+        <include refid="selectPostranAssignVo"/>
+        <where>
+            <if test="doctor1 != null  and doctor1 != ''"> and doctor1 = #{doctor1}</if>
+            <if test="doctor2 != null  and doctor2 != ''"> and doctor2 = #{doctor2}</if>
+            <if test="nurse1 != null  and nurse1 != ''"> and nurse1 = #{nurse1}</if>
+            <if test="nurse2 != null  and nurse2 != ''"> and nurse2 = #{nurse2}</if>
+            <if test="driver != null  and driver != ''"> and driver = #{driver}</if>
+            <if test="drawOutHospital != null  and drawOutHospital != ''"> and draw_out_hospital = #{drawOutHospital}</if>
+            <if test="carNo != null  and carNo != ''"> and car_no = #{carNo}</if>
+            <if test="licensePlateNo != null  and licensePlateNo != ''"> and license_plate_no = #{licensePlateNo}</if>
+            <if test="newPickUpAddress != null  and newPickUpAddress != ''"> and new_pick_up_address = #{newPickUpAddress}</if>
+            <if test="specialCondition != null  and specialCondition != ''"> and special_condition = #{specialCondition}</if>
+            <if test="newReceiveHospitalAddress != null  and newReceiveHospitalAddress != ''"> and new_receive_hospital_address = #{newReceiveHospitalAddress}</if>
+            <if test="receiveHospital != null  and receiveHospital != ''"> and receive_hospital = #{receiveHospital}</if>
+            <if test="dispatchNo != null  and dispatchNo != ''"> and dispatch_no = #{dispatchNo}</if>
+            <if test="jobSuspendReason != null  and jobSuspendReason != ''"> and job_suspend_reason = #{jobSuspendReason}</if>
+            <if test="jobSuspendTime != null  and jobSuspendTime != ''"> and job_suspend_time = #{jobSuspendTime}</if>
+        </where>
+    </select>
+
+    <select id="selectPostranAssignByFdId" parameterType="String" resultMap="PostranAssignResult">
+        <include refid="selectPostranAssignVo"/>
+        where fd_id = #{fdId}
+    </select>
+
+    <insert id="insertPostranAssign" parameterType="PostranAssign">
+        insert into postran_assign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">fd_id,</if>
+            <if test="doctor1 != null">doctor1,</if>
+            <if test="doctor2 != null">doctor2,</if>
+            <if test="nurse1 != null">nurse1,</if>
+            <if test="nurse2 != null">nurse2,</if>
+            <if test="driver != null">driver,</if>
+            <if test="drawOutHospital != null">draw_out_hospital,</if>
+            <if test="carNo != null">car_no,</if>
+            <if test="licensePlateNo != null">license_plate_no,</if>
+            <if test="remark != null">remark,</if>
+            <if test="newPickUpAddress != null">new_pick_up_address,</if>
+            <if test="specialCondition != null">special_condition,</if>
+            <if test="newReceiveHospitalAddress != null">new_receive_hospital_address,</if>
+            <if test="receiveHospital != null">receive_hospital,</if>
+            <if test="dispatchNo != null">dispatch_no,</if>
+            <if test="jobSuspendReason != null">job_suspend_reason,</if>
+            <if test="jobSuspendTime != null">job_suspend_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">#{fdId},</if>
+            <if test="doctor1 != null">#{doctor1},</if>
+            <if test="doctor2 != null">#{doctor2},</if>
+            <if test="nurse1 != null">#{nurse1},</if>
+            <if test="nurse2 != null">#{nurse2},</if>
+            <if test="driver != null">#{driver},</if>
+            <if test="drawOutHospital != null">#{drawOutHospital},</if>
+            <if test="carNo != null">#{carNo},</if>
+            <if test="licensePlateNo != null">#{licensePlateNo},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="newPickUpAddress != null">#{newPickUpAddress},</if>
+            <if test="specialCondition != null">#{specialCondition},</if>
+            <if test="newReceiveHospitalAddress != null">#{newReceiveHospitalAddress},</if>
+            <if test="receiveHospital != null">#{receiveHospital},</if>
+            <if test="dispatchNo != null">#{dispatchNo},</if>
+            <if test="jobSuspendReason != null">#{jobSuspendReason},</if>
+            <if test="jobSuspendTime != null">#{jobSuspendTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePostranAssign" parameterType="PostranAssign">
+        update postran_assign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="doctor1 != null">doctor1 = #{doctor1},</if>
+            <if test="doctor2 != null">doctor2 = #{doctor2},</if>
+            <if test="nurse1 != null">nurse1 = #{nurse1},</if>
+            <if test="nurse2 != null">nurse2 = #{nurse2},</if>
+            <if test="driver != null">driver = #{driver},</if>
+            <if test="drawOutHospital != null">draw_out_hospital = #{drawOutHospital},</if>
+            <if test="carNo != null">car_no = #{carNo},</if>
+            <if test="licensePlateNo != null">license_plate_no = #{licensePlateNo},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="newPickUpAddress != null">new_pick_up_address = #{newPickUpAddress},</if>
+            <if test="specialCondition != null">special_condition = #{specialCondition},</if>
+            <if test="newReceiveHospitalAddress != null">new_receive_hospital_address = #{newReceiveHospitalAddress},</if>
+            <if test="receiveHospital != null">receive_hospital = #{receiveHospital},</if>
+            <if test="dispatchNo != null">dispatch_no = #{dispatchNo},</if>
+            <if test="jobSuspendReason != null">job_suspend_reason = #{jobSuspendReason},</if>
+            <if test="jobSuspendTime != null">job_suspend_time = #{jobSuspendTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where fd_id = #{fdId}
+    </update>
+
+    <delete id="deletePostranAssignByFdId" parameterType="String">
+        delete from postran_assign where fd_id = #{fdId}
+    </delete>
+
+    <delete id="deletePostranAssignByFdIds" parameterType="String">
+        delete from postran_assign where fd_id in
+        <foreach item="fdId" collection="array" open="(" separator="," close=")">
+            #{fdId}
+        </foreach>
+    </delete>
+
+    <select id="selectPostranEntryAssignList" parameterType="PostranEntryAssign"
+            resultMap="PostranEntryAssignResult">
+        <include refid="selectEntryPostranAssignVo"/>
+        <where>
+            <if test="carCallContractPerson != null  and carCallContractPerson != ''">
+                and a.car_call_contract_person like concat(concat('%',#{carCallContractPerson}),'%')
+             </if>
+            <if test="carCallContractNumber != null  and carCallContractNumber != ''">
+                and a.car_call_contract_number like concat(concat('%',#{carCallContractNumber}),'%')
+            </if>
+
+            <if test="caseSource != null  and caseSource != ''"> and case_source = #{caseSource}</if>
+
+            <if test="isArriveHospital != null  and isArriveHospital != ''">
+             and a.is_arrive_hospital = #{isArriveHospital}
+             </if>
+            <if test="patientName != null  and patientName != ''">
+                and a.patient_Name like concat(concat('%',#{patientName}),'%')
+            </if>
+            <if test="dataSource != null  and dataSource != ''"> and a.data_source = #{dataSource}</if>
+            <if test="assignStatus != null  and assignStatus != ''"> and a.assign_status = #{assignStatus}</if>
+
+            <if test="params.beginTime != null  and params.beginTime != ''"> <!-- 开始时间检索 -->
+                AND date_format(a.car_call_date,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(a.car_call_date,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+    </select>
+
+    <select id="getPostranAssignList" parameterType="String" resultType="map">
+        select pe.fd_id, pe.assign_status, pa.job_suspend_reason from postran_entry pe, postran_assign pa where pe.fd_id = pa.fd_id and pe.fd_id in
+        <foreach item="fdId" collection="list" open="(" separator="," close=")">
+            #{fdId}
+        </foreach>
+    </select>
+</mapper>

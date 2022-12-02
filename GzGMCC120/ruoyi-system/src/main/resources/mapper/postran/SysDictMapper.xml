@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.postran.mapper.SysDictMapper">
+    
+    <resultMap type="SysDict" id="SysDictResult">
+        <result property="id"    column="id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="creator"    column="creator"    />
+        <result property="creatorId"    column="creator_id"    />
+        <result property="modifier"    column="modifier"    />
+        <result property="modifierId"    column="modifier_id"    />
+        <result property="dictType"    column="dict_type"    />
+        <result property="tagDelete"    column="tag_delete"    />
+        <result property="dictValue"    column="dict_value"    />
+        <result property="subordinateUnit"    column="subordinate_unit"    />
+        <result property="jurisdictionArea"    column="jurisdiction_area"    />
+        <result property="sort"    column="sort"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+
+    <sql id="selectSysDictVo">
+        select id, create_time, update_time, creator, creator_id, modifier, modifier_id, dict_type, tag_delete, dict_value, subordinate_unit, jurisdiction_area, sort, version from sys_dict
+    </sql>
+
+    <select id="selectSysDictList" parameterType="SysDict" resultMap="SysDictResult">
+        <include refid="selectSysDictVo"/>
+        <where>  
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creatorId != null  and creatorId != ''"> and creator_id = #{creatorId}</if>
+            <if test="modifier != null  and modifier != ''"> and modifier = #{modifier}</if>
+            <if test="modifierId != null  and modifierId != ''"> and modifier_id = #{modifierId}</if>
+            <if test="dictType != null  and dictType != ''"> and dict_type = #{dictType}</if>
+            <if test="tagDelete != null  and tagDelete != ''"> and tag_delete = #{tagDelete}</if>
+            <if test="dictValue != null  and dictValue != ''"> and dict_value = #{dictValue}</if>
+            <if test="subordinateUnit != null  and subordinateUnit != ''"> and subordinate_unit = #{subordinateUnit}</if>
+            <if test="jurisdictionArea != null  and jurisdictionArea != ''"> and jurisdiction_area = #{jurisdictionArea}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="version != null "> and version = #{version}</if>
+        </where>
+        ORDER BY sort asc, update_time desc
+    </select>
+    
+    <select id="selectSysDictById" parameterType="Long" resultMap="SysDictResult">
+        <include refid="selectSysDictVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysDict" parameterType="SysDict">
+        insert into sys_dict
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="creator != null">creator,</if>
+            <if test="creatorId != null">creator_id,</if>
+            <if test="modifier != null">modifier,</if>
+            <if test="modifierId != null">modifier_id,</if>
+            <if test="dictType != null">dict_type,</if>
+            <if test="tagDelete != null">tag_delete,</if>
+            <if test="dictValue != null">dict_value,</if>
+            <if test="subordinateUnit != null">subordinate_unit,</if>
+            <if test="jurisdictionArea != null">jurisdiction_area,</if>
+            <if test="sort != null">sort,</if>
+            <if test="version != null">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="creatorId != null">#{creatorId},</if>
+            <if test="modifier != null">#{modifier},</if>
+            <if test="modifierId != null">#{modifierId},</if>
+            <if test="dictType != null">#{dictType},</if>
+            <if test="tagDelete != null">#{tagDelete},</if>
+            <if test="dictValue != null">#{dictValue},</if>
+            <if test="subordinateUnit != null">#{subordinateUnit},</if>
+            <if test="jurisdictionArea != null">#{jurisdictionArea},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="version != null">#{version},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysDict" parameterType="SysDict">
+        update sys_dict
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="creatorId != null">creator_id = #{creatorId},</if>
+            <if test="modifier != null">modifier = #{modifier},</if>
+            <if test="modifierId != null">modifier_id = #{modifierId},</if>
+            <if test="dictType != null">dict_type = #{dictType},</if>
+            <if test="tagDelete != null">tag_delete = #{tagDelete},</if>
+            <if test="dictValue != null">dict_value = #{dictValue},</if>
+            <if test="subordinateUnit != null">subordinate_unit = #{subordinateUnit},</if>
+            <if test="jurisdictionArea != null">jurisdiction_area = #{jurisdictionArea},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysDictById" parameterType="Long">
+        delete from sys_dict where id = #{id}
+    </delete>
+
+    <delete id="deleteSysDictByIds" parameterType="String">
+        delete from sys_dict where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectSysDictByIds" parameterType="SysDict" resultMap="SysDictResult">
+        <include refid="selectSysDictVo"/>
+        where id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY sort asc, update_time desc
+    </select>
+
+    <select id="selectSysDictByType" parameterType="String" resultType="map">
+        select id, dict_value from sys_dict WHERE tag_delete = '0'
+        <if test="dictType != null  and dictType != ''"> and dict_type = #{dictType}</if>
+        ORDER BY sort asc, update_time desc
+    </select>
+
+    <select id="selectByTypeAndValue" parameterType="String" resultMap="SysDictResult">
+        <include refid="selectSysDictVo"/>
+        WHERE tag_delete = '0'
+        <if test="dictType != null  and dictType != ''"> and dict_type = #{dictType}</if>
+        <if test="dictValue != null  and dictValue != ''"> and dict_value = #{dictValue}</if>
+        ORDER BY sort asc, update_time desc
+    </select>
+</mapper>

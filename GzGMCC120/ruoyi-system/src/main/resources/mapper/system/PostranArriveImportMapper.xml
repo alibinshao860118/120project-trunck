@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PostranArriveImportMapper">
+
+    <resultMap type="PostranArriveImport" id="PostranArriveImportResult">
+        <result property="importId"    column="import_id"    />
+        <result property="sickerId"    column="sicker_id"    />
+        <result property="sickerNum"    column="sicker_num"    />
+        <result property="sickerMobile"    column="sicker_mobile"    />
+        <result property="identityCard"    column="identity_card"    />
+        <result property="callTime"    column="call_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="dataRemark"    column="data_remark"    />
+    </resultMap>
+
+    <sql id="selectPostranArriveImportVo">
+        select import_id, sicker_id, sicker_num, sicker_mobile, identity_card, call_time, create_by, create_time, update_by, update_time, data_remark from postran_arrive_import
+    </sql>
+
+    <select id="selectPostranArriveImportList" parameterType="PostranArriveImport" resultMap="PostranArriveImportResult">
+        <include refid="selectPostranArriveImportVo"/>
+        <where>
+            <if test="sickerId != null "> and sicker_id = #{sickerId}</if>
+            <if test="sickerNum != null "> and sicker_num = #{sickerNum}</if>
+            <if test="sickerMobile != null  and sickerMobile != ''"> and sicker_mobile like concat('%', #{sickerMobile}, '%') </if>
+            <if test="identityCard != null  and identityCard != ''"> and identity_card = #{identityCard}</if>
+            <if test="callTime != null  and callTime != ''"> and call_time = #{callTime}</if>
+            <if test="dataRemark != null  and dataRemark != ''"> and data_remark = #{dataRemark}</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPostranArriveImportByImportId" parameterType="Long" resultMap="PostranArriveImportResult">
+        <include refid="selectPostranArriveImportVo"/>
+        where import_id = #{importId}
+    </select>
+
+    <insert id="insertPostranArriveImport" parameterType="PostranArriveImport" useGeneratedKeys="true" keyProperty="importId">
+        insert into postran_arrive_import
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sickerId != null">sicker_id,</if>
+            <if test="sickerNum != null">sicker_num,</if>
+            <if test="sickerMobile != null">sicker_mobile,</if>
+            <if test="identityCard != null">identity_card,</if>
+            <if test="callTime != null">call_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="dataRemark != null">data_remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sickerId != null">#{sickerId},</if>
+            <if test="sickerNum != null">#{sickerNum},</if>
+            <if test="sickerMobile != null">#{sickerMobile},</if>
+            <if test="identityCard != null">#{identityCard},</if>
+            <if test="callTime != null">#{callTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="dataRemark != null">#{dataRemark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePostranArriveImport" parameterType="PostranArriveImport">
+        update postran_arrive_import
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sickerId != null">sicker_id = #{sickerId},</if>
+            <if test="sickerNum != null">sicker_num = #{sickerNum},</if>
+            <if test="sickerMobile != null">sicker_mobile = #{sickerMobile},</if>
+            <if test="identityCard != null">identity_card = #{identityCard},</if>
+            <if test="callTime != null">call_time = #{callTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="dataRemark != null">data_remark = #{dataRemark},</if>
+        </trim>
+        where import_id = #{importId}
+    </update>
+
+    <delete id="deletePostranArriveImportByImportId" parameterType="Long">
+        delete from postran_arrive_import where import_id = #{importId}
+    </delete>
+
+    <delete id="deletePostranArriveImportByImportIds" parameterType="String">
+        delete from postran_arrive_import where import_id in
+        <foreach item="importId" collection="array" open="(" separator="," close=")">
+            #{importId}
+        </foreach>
+    </delete>
+</mapper>

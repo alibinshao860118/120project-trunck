@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.postran.mapper.PostranMonitorMapper">
+    
+    <resultMap type="PostranMonitor" id="PostranMonitorResult">
+        <result property="fdId"    column="fd_id"    />
+        <result property="drawOutTime"    column="draw_out_time"    />
+        <result property="ambulanceType"    column="ambulance_type"    />
+        <result property="noticeTime"    column="notice_time"    />
+        <result property="ambulanceBackTime"    column="ambulance_back_time"    />
+        <result property="completeJobTime"    column="complete_job_time"    />
+        <result property="arriveAirportEcTime"    column="arrive_airport_ec_time"    />
+        <result property="rectificationLimit"    column="rectification_limit"    />
+        <result property="rectificationDemand"    column="rectification_demand"    />
+        <result property="supervisor"    column="supervisor"    />
+        <result property="carCallRemark"    column="car_call_remark"    />
+        <result property="assignRemark"    column="assign_remark"    />
+        <result property="finishRemark"    column="finish_remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPostranMonitorVo">
+        select fd_id, draw_out_time, ambulance_type, notice_time, ambulance_back_time, complete_job_time, arrive_airport_ec_time, rectification_limit, rectification_demand, supervisor, car_call_remark, assign_remark, finish_remark, create_by, create_time, update_by, update_time from postran_monitor
+    </sql>
+
+    <select id="selectPostranMonitorList" parameterType="PostranMonitor" resultMap="PostranMonitorResult">
+        <include refid="selectPostranMonitorVo"/>
+        <where>  
+            <if test="drawOutTime != null "> and draw_out_time = #{drawOutTime}</if>
+            <if test="ambulanceType != null  and ambulanceType != ''"> and ambulance_type = #{ambulanceType}</if>
+            <if test="noticeTime != null "> and notice_time = #{noticeTime}</if>
+            <if test="ambulanceBackTime != null "> and ambulance_back_time = #{ambulanceBackTime}</if>
+            <if test="completeJobTime != null "> and complete_job_time = #{completeJobTime}</if>
+            <if test="arriveAirportEcTime != null "> and arrive_airport_ec_time = #{arriveAirportEcTime}</if>
+            <if test="rectificationLimit != null  and rectificationLimit != ''"> and rectification_limit = #{rectificationLimit}</if>
+            <if test="rectificationDemand != null  and rectificationDemand != ''"> and rectification_demand = #{rectificationDemand}</if>
+            <if test="supervisor != null  and supervisor != ''"> and supervisor = #{supervisor}</if>
+            <if test="carCallRemark != null  and carCallRemark != ''"> and car_call_remark = #{carCallRemark}</if>
+            <if test="assignRemark != null  and assignRemark != ''"> and assign_remark = #{assignRemark}</if>
+            <if test="finishRemark != null  and finishRemark != ''"> and finish_remark = #{finishRemark}</if>
+        </where>
+    </select>
+    
+    <select id="selectPostranMonitorByFdId" parameterType="String" resultMap="PostranMonitorResult">
+        <include refid="selectPostranMonitorVo"/>
+        where fd_id = #{fdId}
+    </select>
+        
+    <insert id="insertPostranMonitor" parameterType="PostranMonitor">
+        insert into postran_monitor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">fd_id,</if>
+            <if test="drawOutTime != null">draw_out_time,</if>
+            <if test="ambulanceType != null">ambulance_type,</if>
+            <if test="noticeTime != null">notice_time,</if>
+            <if test="ambulanceBackTime != null">ambulance_back_time,</if>
+            <if test="completeJobTime != null">complete_job_time,</if>
+            <if test="arriveAirportEcTime != null">arrive_airport_ec_time,</if>
+            <if test="rectificationLimit != null">rectification_limit,</if>
+            <if test="rectificationDemand != null">rectification_demand,</if>
+            <if test="supervisor != null">supervisor,</if>
+            <if test="carCallRemark != null">car_call_remark,</if>
+            <if test="assignRemark != null">assign_remark,</if>
+            <if test="finishRemark != null">finish_remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">#{fdId},</if>
+            <if test="drawOutTime != null">#{drawOutTime},</if>
+            <if test="ambulanceType != null">#{ambulanceType},</if>
+            <if test="noticeTime != null">#{noticeTime},</if>
+            <if test="ambulanceBackTime != null">#{ambulanceBackTime},</if>
+            <if test="completeJobTime != null">#{completeJobTime},</if>
+            <if test="arriveAirportEcTime != null">#{arriveAirportEcTime},</if>
+            <if test="rectificationLimit != null">#{rectificationLimit},</if>
+            <if test="rectificationDemand != null">#{rectificationDemand},</if>
+            <if test="supervisor != null">#{supervisor},</if>
+            <if test="carCallRemark != null">#{carCallRemark},</if>
+            <if test="assignRemark != null">#{assignRemark},</if>
+            <if test="finishRemark != null">#{finishRemark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePostranMonitor" parameterType="PostranMonitor">
+        update postran_monitor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="drawOutTime != null">draw_out_time = #{drawOutTime},</if>
+            <if test="ambulanceType != null">ambulance_type = #{ambulanceType},</if>
+            <if test="noticeTime != null">notice_time = #{noticeTime},</if>
+            <if test="ambulanceBackTime != null">ambulance_back_time = #{ambulanceBackTime},</if>
+            <if test="completeJobTime != null">complete_job_time = #{completeJobTime},</if>
+            <if test="arriveAirportEcTime != null">arrive_airport_ec_time = #{arriveAirportEcTime},</if>
+            <if test="rectificationLimit != null">rectification_limit = #{rectificationLimit},</if>
+            <if test="rectificationDemand != null">rectification_demand = #{rectificationDemand},</if>
+            <if test="supervisor != null">supervisor = #{supervisor},</if>
+            <if test="carCallRemark != null">car_call_remark = #{carCallRemark},</if>
+            <if test="assignRemark != null">assign_remark = #{assignRemark},</if>
+            <if test="finishRemark != null">finish_remark = #{finishRemark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where fd_id = #{fdId}
+    </update>
+
+    <delete id="deletePostranMonitorByFdId" parameterType="String">
+        delete from postran_monitor where fd_id = #{fdId}
+    </delete>
+
+    <delete id="deletePostranMonitorByFdIds" parameterType="String">
+        delete from postran_monitor where fd_id in 
+        <foreach item="fdId" collection="array" open="(" separator="," close=")">
+            #{fdId}
+        </foreach>
+    </delete>
+</mapper>

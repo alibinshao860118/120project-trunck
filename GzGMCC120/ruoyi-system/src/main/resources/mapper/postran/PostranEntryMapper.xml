@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.postran.mapper.PostranEntryMapper">
+    
+    <resultMap type="PostranEntry" id="PostranEntryResult">
+        <result property="fdId"    column="fd_id"    />
+        <result property="acceptNo"    column="accept_no"    />
+        <result property="carCallUnit"    column="car_call_unit"    />
+        <result property="carCallDate"    column="car_call_date"    />
+        <result property="carCallTime"    column="car_call_time"    />
+        <result property="carCallContractPerson"    column="car_call_contract_person"    />
+        <result property="carCallContractNumber"    column="car_call_contract_number"    />
+        <result property="patientName"    column="patient_name"    />
+        <result property="patientIdNumber"    column="patient_id_number"    />
+        <result property="patientContractNumber"    column="patient_contract_number"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="caseSource"    column="case_source"    />
+        <result property="personIdentity"    column="person_identity"    />
+        <result property="nucleateResult"    column="nucleate_result"    />
+        <result property="nucleateIsPositive"    column="nucleate_is_positive"    />
+        <result property="epgHighRiskFactor"    column="epg_high_risk_factor"    />
+        <result property="newHighRiskFactor"    column="new_high_risk_factor"    />
+        <result property="sentHospital"    column="sent_hospital"    />
+        <result property="licensePlateNumber"    column="license_plate_number"    />
+        <result property="cityEightConfirmTime"    column="city_eight_confirm_time"    />
+        <result property="assignDate"    column="assign_date"    />
+        <result property="assignTime"    column="assign_time"    />
+        <result property="ambulanceType"    column="ambulance_type"    />
+        <result property="noticeTime"    column="notice_time"    />
+        <result property="drawOutTime"    column="draw_out_time"    />
+        <result property="arriveAirportEcTime"    column="arrive_airport_ec_time"    />
+        <result property="pickUpAddress"    column="pick_up_address"    />
+        <result property="receiveHospital"    column="receive_hospital"    />
+        <result property="ambulanceBackTime"    column="ambulance_back_time"    />
+        <result property="completeJobTime"    column="complete_job_time"    />
+        <result property="patientPersonTime"    column="patient_person_time"    />
+        <result property="carCallRemark"    column="car_call_remark"    />
+        <result property="assignRemark"    column="assign_remark"    />
+        <result property="finishRemark"    column="finish_remark"    />
+        <result property="dutyMan"    column="duty_man"    />
+        <result property="specialCondition"    column="special_condition"    />
+        <result property="carCallArea"    column="car_call_area"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="isArriveHospital"    column="is_arrive_hospital"    />
+        <result property="assignStatus"    column="assign_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPostranEntryVo">
+        select fd_id, accept_no, car_call_unit, car_call_date, car_call_time, car_call_contract_person, car_call_contract_number, patient_name, patient_id_number, patient_contract_number, sex, age, case_source, person_identity, nucleate_result, nucleate_is_positive, epg_high_risk_factor, new_high_risk_factor, sent_hospital, license_plate_number, city_eight_confirm_time, assign_date, assign_time, ambulance_type, notice_time, draw_out_time, arrive_airport_ec_time, pick_up_address, receive_hospital, ambulance_back_time, complete_job_time, patient_person_time, car_call_remark, assign_remark, finish_remark, duty_man, special_condition, car_call_area, data_source, is_arrive_hospital, assign_status, create_by, create_time, update_by, update_time from postran_entry
+    </sql>
+    <sql id="getPostranEntryVo">
+        select fd_id, accept_no, car_call_unit, car_call_date, car_call_time, car_call_contract_person, car_call_contract_number, patient_name, patient_id_number, patient_contract_number, sex, age, case_source, person_identity, nucleate_result, nucleate_is_positive, epg_high_risk_factor, new_high_risk_factor, sent_hospital, license_plate_number, city_eight_confirm_time, assign_date, assign_time, ambulance_type, notice_time, draw_out_time, arrive_airport_ec_time, pick_up_address, receive_hospital, ambulance_back_time, complete_job_time, patient_person_time, car_call_remark, assign_remark, finish_remark, duty_man, special_condition, car_call_area, data_source, is_arrive_hospital, assign_status from postran_entry
+    </sql>
+
+    <select id="selectPostranEntryList" parameterType="PostranEntry" resultMap="PostranEntryResult">
+        <include refid="selectPostranEntryVo"/>
+        <where>  
+            <if test="acceptNo != null  and acceptNo != ''"> and accept_no = #{acceptNo}</if>
+            <if test="carCallUnit != null  and carCallUnit != ''"> and car_call_unit = #{carCallUnit}</if>
+            <if test="carCallDate != null  and carCallDate != ''"> and car_call_date = #{carCallDate}</if>
+            <if test="carCallTime != null  and carCallTime != ''"> and car_call_time = #{carCallTime}</if>
+            <if test="carCallContractPerson != null  and carCallContractPerson != ''"> and car_call_contract_person = #{carCallContractPerson}</if>
+            <if test="carCallContractNumber != null  and carCallContractNumber != ''"> and car_call_contract_number = #{carCallContractNumber}</if>
+            <if test="patientName != null  and patientName != ''"> and patient_name like concat('%', #{patientName}, '%')</if>
+            <if test="patientIdNumber != null  and patientIdNumber != ''"> and patient_id_number = #{patientIdNumber}</if>
+            <if test="patientContractNumber != null  and patientContractNumber != ''"> and patient_contract_number = #{patientContractNumber}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="caseSource != null  and caseSource != ''"> and case_source = #{caseSource}</if>
+            <if test="personIdentity != null  and personIdentity != ''"> and person_identity = #{personIdentity}</if>
+            <if test="nucleateResult != null  and nucleateResult != ''"> and nucleate_result = #{nucleateResult}</if>
+            <if test="nucleateIsPositive != null  and nucleateIsPositive != ''"> and nucleate_is_positive = #{nucleateIsPositive}</if>
+            <if test="epgHighRiskFactor != null  and epgHighRiskFactor != ''"> and epg_high_risk_factor = #{epgHighRiskFactor}</if>
+            <if test="newHighRiskFactor != null  and newHighRiskFactor != ''"> and new_high_risk_factor = #{newHighRiskFactor}</if>
+            <if test="sentHospital != null  and sentHospital != ''"> and sent_hospital = #{sentHospital}</if>
+            <if test="licensePlateNumber != null  and licensePlateNumber != ''"> and license_plate_number = #{licensePlateNumber}</if>
+            <if test="cityEightConfirmTime != null "> and city_eight_confirm_time = #{cityEightConfirmTime}</if>
+            <if test="assignDate != null  and assignDate != ''"> and assign_date = #{assignDate}</if>
+            <if test="assignTime != null  and assignTime != ''"> and assign_time = #{assignTime}</if>
+            <if test="ambulanceType != null  and ambulanceType != ''"> and ambulance_type = #{ambulanceType}</if>
+            <if test="noticeTime != null "> and notice_time = #{noticeTime}</if>
+            <if test="drawOutTime != null "> and draw_out_time = #{drawOutTime}</if>
+            <if test="arriveAirportEcTime != null "> and arrive_airport_ec_time = #{arriveAirportEcTime}</if>
+            <if test="pickUpAddress != null  and pickUpAddress != ''"> and pick_up_address = #{pickUpAddress}</if>
+            <if test="receiveHospital != null  and receiveHospital != ''"> and receive_hospital = #{receiveHospital}</if>
+            <if test="ambulanceBackTime != null "> and ambulance_back_time = #{ambulanceBackTime}</if>
+            <if test="completeJobTime != null "> and complete_job_time = #{completeJobTime}</if>
+            <if test="patientPersonTime != null  and patientPersonTime != ''"> and patient_person_time = #{patientPersonTime}</if>
+            <if test="carCallRemark != null  and carCallRemark != ''"> and car_call_remark = #{carCallRemark}</if>
+            <if test="assignRemark != null  and assignRemark != ''"> and assign_remark = #{assignRemark}</if>
+            <if test="finishRemark != null  and finishRemark != ''"> and finish_remark = #{finishRemark}</if>
+            <if test="dutyMan != null  and dutyMan != ''"> and duty_man = #{dutyMan}</if>
+            <if test="specialCondition != null  and specialCondition != ''"> and special_condition = #{specialCondition}</if>
+            <if test="carCallArea != null  and carCallArea != ''"> and car_call_area = #{carCallArea}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="isArriveHospital != null  and isArriveHospital != ''"> and is_arrive_hospital = #{isArriveHospital}</if>
+            <if test="assignStatus != null  and assignStatus != ''"> and assign_status = #{assignStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectPostranEntryByFdId" parameterType="String" resultMap="PostranEntryResult">
+        <include refid="selectPostranEntryVo"/>
+        where fd_id = #{fdId}
+    </select>
+        
+    <insert id="insertPostranEntry" parameterType="PostranEntry">
+        insert into postran_entry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">fd_id,</if>
+            <if test="acceptNo != null">accept_no,</if>
+            <if test="carCallUnit != null">car_call_unit,</if>
+            <if test="carCallDate != null">car_call_date,</if>
+            <if test="carCallTime != null">car_call_time,</if>
+            <if test="carCallContractPerson != null">car_call_contract_person,</if>
+            <if test="carCallContractNumber != null">car_call_contract_number,</if>
+            <if test="patientName != null">patient_name,</if>
+            <if test="patientIdNumber != null">patient_id_number,</if>
+            <if test="patientContractNumber != null">patient_contract_number,</if>
+            <if test="sex != null">sex,</if>
+            <if test="age != null">age,</if>
+            <if test="caseSource != null">case_source,</if>
+            <if test="personIdentity != null">person_identity,</if>
+            <if test="nucleateResult != null">nucleate_result,</if>
+            <if test="nucleateIsPositive != null">nucleate_is_positive,</if>
+            <if test="epgHighRiskFactor != null">epg_high_risk_factor,</if>
+            <if test="newHighRiskFactor != null">new_high_risk_factor,</if>
+            <if test="sentHospital != null">sent_hospital,</if>
+            <if test="licensePlateNumber != null">license_plate_number,</if>
+            <if test="cityEightConfirmTime != null">city_eight_confirm_time,</if>
+            <if test="assignDate != null">assign_date,</if>
+            <if test="assignTime != null">assign_time,</if>
+            <if test="ambulanceType != null">ambulance_type,</if>
+            <if test="noticeTime != null">notice_time,</if>
+            <if test="drawOutTime != null">draw_out_time,</if>
+            <if test="arriveAirportEcTime != null">arrive_airport_ec_time,</if>
+            <if test="pickUpAddress != null">pick_up_address,</if>
+            <if test="receiveHospital != null">receive_hospital,</if>
+            <if test="ambulanceBackTime != null">ambulance_back_time,</if>
+            <if test="completeJobTime != null">complete_job_time,</if>
+            <if test="patientPersonTime != null">patient_person_time,</if>
+            <if test="carCallRemark != null">car_call_remark,</if>
+            <if test="assignRemark != null">assign_remark,</if>
+            <if test="finishRemark != null">finish_remark,</if>
+            <if test="dutyMan != null">duty_man,</if>
+            <if test="specialCondition != null">special_condition,</if>
+            <if test="carCallArea != null">car_call_area,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="isArriveHospital != null">is_arrive_hospital,</if>
+            <if test="assignStatus != null">assign_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fdId != null">#{fdId},</if>
+            <if test="acceptNo != null">#{acceptNo},</if>
+            <if test="carCallUnit != null">#{carCallUnit},</if>
+            <if test="carCallDate != null">#{carCallDate},</if>
+            <if test="carCallTime != null">#{carCallTime},</if>
+            <if test="carCallContractPerson != null">#{carCallContractPerson},</if>
+            <if test="carCallContractNumber != null">#{carCallContractNumber},</if>
+            <if test="patientName != null">#{patientName},</if>
+            <if test="patientIdNumber != null">#{patientIdNumber},</if>
+            <if test="patientContractNumber != null">#{patientContractNumber},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="age != null">#{age},</if>
+            <if test="caseSource != null">#{caseSource},</if>
+            <if test="personIdentity != null">#{personIdentity},</if>
+            <if test="nucleateResult != null">#{nucleateResult},</if>
+            <if test="nucleateIsPositive != null">#{nucleateIsPositive},</if>
+            <if test="epgHighRiskFactor != null">#{epgHighRiskFactor},</if>
+            <if test="newHighRiskFactor != null">#{newHighRiskFactor},</if>
+            <if test="sentHospital != null">#{sentHospital},</if>
+            <if test="licensePlateNumber != null">#{licensePlateNumber},</if>
+            <if test="cityEightConfirmTime != null">#{cityEightConfirmTime},</if>
+            <if test="assignDate != null">#{assignDate},</if>
+            <if test="assignTime != null">#{assignTime},</if>
+            <if test="ambulanceType != null">#{ambulanceType},</if>
+            <if test="noticeTime != null">#{noticeTime},</if>
+            <if test="drawOutTime != null">#{drawOutTime},</if>
+            <if test="arriveAirportEcTime != null">#{arriveAirportEcTime},</if>
+            <if test="pickUpAddress != null">#{pickUpAddress},</if>
+            <if test="receiveHospital != null">#{receiveHospital},</if>
+            <if test="ambulanceBackTime != null">#{ambulanceBackTime},</if>
+            <if test="completeJobTime != null">#{completeJobTime},</if>
+            <if test="patientPersonTime != null">#{patientPersonTime},</if>
+            <if test="carCallRemark != null">#{carCallRemark},</if>
+            <if test="assignRemark != null">#{assignRemark},</if>
+            <if test="finishRemark != null">#{finishRemark},</if>
+            <if test="dutyMan != null">#{dutyMan},</if>
+            <if test="specialCondition != null">#{specialCondition},</if>
+            <if test="carCallArea != null">#{carCallArea},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="isArriveHospital != null">#{isArriveHospital},</if>
+            <if test="assignStatus != null">#{assignStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePostranEntry" parameterType="PostranEntry">
+        update postran_entry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="acceptNo != null">accept_no = #{acceptNo},</if>
+            <if test="carCallUnit != null">car_call_unit = #{carCallUnit},</if>
+            <if test="carCallDate != null">car_call_date = #{carCallDate},</if>
+            <if test="carCallTime != null">car_call_time = #{carCallTime},</if>
+            <if test="carCallContractPerson != null">car_call_contract_person = #{carCallContractPerson},</if>
+            <if test="carCallContractNumber != null">car_call_contract_number = #{carCallContractNumber},</if>
+            <if test="patientName != null">patient_name = #{patientName},</if>
+            <if test="patientIdNumber != null">patient_id_number = #{patientIdNumber},</if>
+            <if test="patientContractNumber != null">patient_contract_number = #{patientContractNumber},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="caseSource != null">case_source = #{caseSource},</if>
+            <if test="personIdentity != null">person_identity = #{personIdentity},</if>
+            <if test="nucleateResult != null">nucleate_result = #{nucleateResult},</if>
+            <if test="nucleateIsPositive != null">nucleate_is_positive = #{nucleateIsPositive},</if>
+            <if test="epgHighRiskFactor != null">epg_high_risk_factor = #{epgHighRiskFactor},</if>
+            <if test="newHighRiskFactor != null">new_high_risk_factor = #{newHighRiskFactor},</if>
+            <if test="sentHospital != null">sent_hospital = #{sentHospital},</if>
+            <if test="licensePlateNumber != null">license_plate_number = #{licensePlateNumber},</if>
+            <if test="cityEightConfirmTime != null">city_eight_confirm_time = #{cityEightConfirmTime},</if>
+            <if test="assignDate != null">assign_date = #{assignDate},</if>
+            <if test="assignTime != null">assign_time = #{assignTime},</if>
+            <if test="ambulanceType != null">ambulance_type = #{ambulanceType},</if>
+            <if test="noticeTime != null">notice_time = #{noticeTime},</if>
+            <if test="drawOutTime != null">draw_out_time = #{drawOutTime},</if>
+            <if test="arriveAirportEcTime != null">arrive_airport_ec_time = #{arriveAirportEcTime},</if>
+            <if test="pickUpAddress != null">pick_up_address = #{pickUpAddress},</if>
+            <if test="receiveHospital != null">receive_hospital = #{receiveHospital},</if>
+            <if test="ambulanceBackTime != null">ambulance_back_time = #{ambulanceBackTime},</if>
+            <if test="completeJobTime != null">complete_job_time = #{completeJobTime},</if>
+            <if test="patientPersonTime != null">patient_person_time = #{patientPersonTime},</if>
+            <if test="carCallRemark != null">car_call_remark = #{carCallRemark},</if>
+            <if test="assignRemark != null">assign_remark = #{assignRemark},</if>
+            <if test="finishRemark != null">finish_remark = #{finishRemark},</if>
+            <if test="dutyMan != null">duty_man = #{dutyMan},</if>
+            <if test="specialCondition != null">special_condition = #{specialCondition},</if>
+            <if test="carCallArea != null">car_call_area = #{carCallArea},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="isArriveHospital != null">is_arrive_hospital = #{isArriveHospital},</if>
+            <if test="assignStatus != null">assign_status = #{assignStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where fd_id = #{fdId}
+    </update>
+
+    <delete id="deletePostranEntryByFdId" parameterType="String">
+        delete from postran_entry where fd_id = #{fdId}
+    </delete>
+
+    <delete id="deletePostranEntryByFdIds" parameterType="String">
+        delete from postran_entry where fd_id in 
+        <foreach item="fdId" collection="array" open="(" separator="," close=")">
+            #{fdId}
+        </foreach>
+    </delete>
+
+    <select id="getPostranEntryByFdId" parameterType="String" resultMap="PostranEntryResult">
+        <include refid="getPostranEntryVo"/>
+        where fd_id = #{fdId}
+    </select>
+
+    <select id="getRepeatPostranEntry" resultMap="PostranEntryResult">
+        <include refid="selectPostranEntryVo"/>
+        where car_call_time = #{carCallTime} and patient_id_number = #{patientIdNumber} and patient_contract_number = #{patientContractNumber}
+    </select>
+
+    <select id="getPostranEntryList" parameterType="String" resultMap="PostranEntryResult">
+        <include refid="getPostranEntryVo"/>
+        where fd_id in
+        <foreach item="fdId" collection="list" open="(" separator="," close=")">
+            #{fdId}
+        </foreach>
+    </select>
+</mapper>
