@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.annotation.Anonymous;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -81,17 +82,28 @@ public class OfficeController extends BaseController
      * 转换合同文件
      */
     @PostMapping(value = "/changeinfo")
-    public AjaxResult changeinfo(@PathVariable("args") String args)
+    public AjaxResult changeinfo(@RequestBody String args)
     {
         String result="sucess";
         Map<String,Object> map = new HashMap<>();
-        JSONObject req = JSONObject.parseObject(args);
+        JSONArray req = JSONArray.parseArray(args);
+        //获取类别
+//        Office office = new Office();
+
+        for (int i = 0; i < req.size(); i++) {
+            JSONObject obj = JSONObject.parseObject(req.get(i).toString());
+            if (obj.containsKey("lb")){
+//                office.setLb((String)obj.get("lb"));
+                map.put((String)obj.get("lb"),(String)obj.get("content"));
+            }
+        }
+
+//        List<Office> list = officeService.selectOfficeList(office);
 
         String documentname ="template22.docx";
-        XWPFTemplate template = XWPFTemplate.compile("D:\\A-kingpoint\\改造20221201\\"+documentname).render(
-                new HashMap<String, Object>(){{
-                    put("title", "Hi, poi-tl Word模板引擎");
-                }});
+        String docUrl="D:\\A-kingpoint\\改造20221201\\";
+        XWPFTemplate template = XWPFTemplate.compile(docUrl+documentname).render(
+                map);
 //        template.write(new FileOutputStream("D:\\kingpoint\\output.docx"));
 //        template.close();
         try {
@@ -99,7 +111,7 @@ public class OfficeController extends BaseController
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String id = req.getString("id");
+
         return success(result);
     }
 
