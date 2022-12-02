@@ -2,6 +2,7 @@ package com.ruoyi.system.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.deepoove.poi.config.Configure;
+import com.deepoove.poi.plugin.table.LoopRowTableRenderPolicy;
 import com.ruoyi.common.annotation.Anonymous;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,7 @@ public class OfficeController extends BaseController
 {
     @Autowired
     private IOfficeService officeService;
-
+    final String docUrl="D:\\A-kingpoint\\改造20221201\\";
     /**
      * 查询合同文件列表
      */
@@ -101,20 +104,57 @@ public class OfficeController extends BaseController
 //        List<Office> list = officeService.selectOfficeList(office);
 
         String documentname ="template22.docx";
-        String docUrl="D:\\A-kingpoint\\改造20221201\\";
+
         XWPFTemplate template = XWPFTemplate.compile(docUrl+documentname).render(
                 map);
 //        template.write(new FileOutputStream("D:\\kingpoint\\output.docx"));
 //        template.close();
         try {
-            template.writeAndClose(new FileOutputStream("D:\\A-kingpoint\\output.docx"));
+            template.writeAndClose(new FileOutputStream(docUrl+"output\\output1.docx"));
         } catch (IOException e) {
             e.printStackTrace();
+            return error();
         }
 
         return success(result);
     }
+    /**
+     * 转换合同文件excel
+     */
+    @PostMapping(value = "/changeinfoExcel")
+    public AjaxResult changeinfoExcel(@RequestBody String args)
+    {
+        String result="sucess";
 
+        JSONArray req = JSONArray.parseArray(args);
+
+        List<Map> offices = req.toJavaList(Map.class);
+        //获取类别
+
+
+        LoopRowTableRenderPolicy policy = new LoopRowTableRenderPolicy();
+
+        Configure config = Configure.builder()
+                .bind("offices", policy)
+                  .build();     // bind("labors", policy)
+        String documentname ="template33.docx";
+        XWPFTemplate template = XWPFTemplate.compile(docUrl+documentname, config).render(
+                new HashMap<String, Object>() {{
+                    put("offices", offices);
+//                    put("labors", labors);
+                }}
+        );
+
+
+        try {
+            template.writeAndClose(new FileOutputStream(docUrl+"output\\output2.docx"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return error();
+        }
+
+        return success(result);
+    }
     /**
      * 新增合同文件
      */
